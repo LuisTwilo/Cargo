@@ -1,0 +1,42 @@
+.integration{
+    width: 95%;
+}
+
+.integration__header{
+    margin-top: 1rem;
+    background-color: white;
+    border: var(--text-primary) 1px solid;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    
+}
+
+.integration__title{
+    margin: 1rem;
+}
+
+.integration__body{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.integration__new_button{
+    margin: 0.5rem;
+    background-color:var(--button-blue-primary);
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.integration__new_button:hover{
+    background-color:var(--button-blue-secondary);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}

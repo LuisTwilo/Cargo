@@ -1,0 +1,12 @@
+.topNavbar {
+  width: 100%;
+  height: 2rem;
+  background-color: var(--back-primary);
+  position: fixed;
+  top: 0%;
+  display: flex;
+}
+
+.item {
+  align-content: flex-end;
+}

@@ -1,0 +1,89 @@
+.navbar{
+    width: 5rem;
+    height: 100vh;
+    position: fixed;
+    background-color: var(--back-primary);
+    transition: width 200ms ease;
+}
+
+.navbar:hover{
+    width: 16rem; 
+}
+
+.navbar:hover .navbar-item__label{
+    transition: display 300ms ease-in ;
+    display: block;
+}
+
+.navbar:hover .logo-text{
+    transition: display 300ms ease-in ;
+    display: block;
+}
+
+.navbar__nav{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar__item{
+    width: 100%;
+}
+
+.navbar__item a{
+    text-decoration: none;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    color: var(--text-primary);
+    filter: grayscale(100%) opacity(0.7);
+    transition: 200ms;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3ch;
+    font-weight: bolder;
+    width: 100%;
+}
+
+.logo .logo-text{
+    display: none;
+    margin-left: 1rem;
+    
+}
+
+.logo svg{
+    min-width: 2rem;
+    width: 2rem;
+    margin: 0 1.5rem;
+    transform: rotate(0deg);
+    transition: transform 200ms;
+}
+
+.logo:hover{
+    background: var(--back-secondary);
+    color: var(--text-secondary);
+    filter: grayscale(0%) opacity(1);
+    transition: 200ms;
+}
+
+.navbar:hover .logo svg{
+    transform: rotate(-180deg);
+    transition: transform 400ms;
+}
+
+.settings{
+    position: absolute;
+    bottom: 2rem;
+}
+
+.settings:hover svg{
+    transform: rotate(-180deg);
+    transition: transform 400ms;
+}

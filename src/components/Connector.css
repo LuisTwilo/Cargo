@@ -1,0 +1,20 @@
+.connectionCard{
+    border: var(--text-primary) 1px solid;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 20rem;
+    width: 16rem;
+    cursor: pointer;
+}
+
+.connectionCard:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.connectionCard__header{
+    display: flex;
+    justify-content: space-between;
+}

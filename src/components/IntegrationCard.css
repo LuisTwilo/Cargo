@@ -1,0 +1,48 @@
+.integrationCard__roputeWrapper{
+    text-decoration: none;
+    color: black;
+    width: 16rem;
+}
+
+
+.integrationCard{
+    border: var(--text-primary) 1px solid;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    height: 20rem;
+    width: 16rem;
+    cursor: pointer;
+}
+
+.integrationCard:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.integrationCard__header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.integrationCard__header > svg {
+    width: 1.5rem;
+}
+
+.integrationCard__header path:hover {
+    fill: grey ;
+    transition: 200ms;
+}
+
+.integrationCard__header  path{
+    fill: var(--text-primary) ;
+    filter: grayscale(100%) opacity(0.7);
+    transition: 200ms;
+}
+
+
+.integrationCard__footer{
+    margin-top: auto;
+    border-top: var(--text-primary) 1px solid;
+}

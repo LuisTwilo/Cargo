@@ -1,0 +1,26 @@
+.component {
+  display: flex;
+  width: 90%;
+  height: 80%;
+  margin: 1rem;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.table {
+  width: 100%;
+}
+
+.tablerows {
+  padding: 10px;
+}
+
+.tablerows > a {
+  text-decoration: none;
+}
+
+th {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+}
