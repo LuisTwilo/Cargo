@@ -62,25 +62,27 @@ function Flow() {
 
   const handleCSVSubmit = async (file) => {
     let reader = new FileReader();
-
     reader.readAsText(file);
     reader.onload = () => {
-      let result = [];
       let lines = reader.result.split("\n");
-      let headers = lines[0].split(",").map((title) => {
-        let headerTitle = title.replace(/['"]+/g, "");
+      let result = [];
+      let headers = lines[0]
+        .split(",")
+        .map((title) => title.replace(/['"]+/g, ""));
 
-        for (let i = 1; i < lines.length; i++) {
-          let obj = {};
-          let currentline = lines[i].split(",");
-          for (let j = 0; j < headers.length; j++) {
-            obj[headers[j]] = currentline[j];
-          }
-          result.push(obj);
+      for (let i = 1; i < lines.length; i++) {
+        let obj = {};
+        let currentline = lines[i].split(",");
+        for (let j = 0; j < headers.length; j++) {
+          obj[headers[j]] = currentline[j]
+            ? currentline[j].replace(/['"]+/g, "")
+            : "";
         }
-        return { value: headerTitle, label: headerTitle };
-      });
-      setCsvColumns(headers);
+        result.push(obj);
+      }
+      setCsvColumns(
+        headers.map((header) => ({ value: header, label: header }))
+      );
       setCsvData(result);
     };
   };
