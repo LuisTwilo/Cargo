@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
@@ -30,11 +30,17 @@ function Flow() {
 
   const animatedComponents = makeAnimated();
 
+  useEffect(() => {
+    const setIntegrationsOnFirstRender = async () => {
+      setConnections(await getConnections());
+    };
+    setIntegrationsOnFirstRender();
+  }, []);
+
   const handleInitialChange = async (initial) => {
     if (initial === "salesforce") {
       setIsSalesforce(true);
       setIsCsv(false);
-      setConnections(await getConnections());
     } else {
       setIsSalesforce(false);
       setIsCsv(true);
@@ -55,9 +61,15 @@ function Flow() {
     setIsLoading(false);
   };
 
-  const handleObjectChange = async (currentObject) => {
+  const handleSourceObjectChange = async (currentObject) => {
     setCurrentSourceObject(currentObject);
     setSourceFields(await getObjectFields(sourceConnectionId, currentObject));
+  };
+
+  const handleEndObjectChange = async (currentObject) => {
+    setCurrentEndObject(currentObject);
+    setEndFields(await getObjectFields(endConnectionId, currentObject));
+    console.log(endFields);
   };
 
   const handleCSVSubmit = async (file) => {
@@ -81,6 +93,9 @@ function Flow() {
         result.push(obj);
       }
       setCsvColumns(
+        headers.map((header) => ({ value: header, label: header }))
+      );
+      setSelectedFields(
         headers.map((header) => ({ value: header, label: header }))
       );
       setCsvData(result);
@@ -108,7 +123,7 @@ function Flow() {
           <Select
             options={[
               { value: "1", label: " " },
-              { value: "salesforce", label: "Salesforce" },
+              { value: "salesforce", label: "Connect with a Salesforce Org" },
               { value: "csv", label: "Import CSV File" },
             ]}
             onChange={(e) => handleInitialChange(e.value)}
@@ -123,10 +138,14 @@ function Flow() {
               <div className="connection">
                 <div className="connection__select">
                   <Select
-                    options={connections.map((connection) => ({
-                      value: connection._id,
-                      label: connection.name,
-                    }))}
+                    options={
+                      connections
+                        ? connections.map((connection) => ({
+                            value: connection._id,
+                            label: connection.name,
+                          }))
+                        : []
+                    }
                     onChange={(e) => handleSourceConnectionChange(e.value)}
                   />
                 </div>
@@ -140,7 +159,7 @@ function Flow() {
 
               <Select
                 options={sourceSalesforceObjects}
-                onChange={(e) => handleObjectChange(e.value)}
+                onChange={(e) => handleSourceObjectChange(e.value)}
                 styles={{ menu: (base) => ({ ...base, position: "relative" }) }}
                 isLoading={isLoading}
               />
@@ -175,7 +194,7 @@ function Flow() {
 
       <div className="destination">
         <div>
-          <label htmlFor="connections">Connections</label>
+          <label htmlFor="connections">End Connection</label>
 
           <Select
             options={connections.map((connection) => ({
@@ -191,13 +210,30 @@ function Flow() {
 
           <Select
             options={endSalesforceObjects}
-            onChange={(e) => handleObjectChange(e.value)}
+            onChange={(e) => handleEndObjectChange(e.value)}
             styles={{ menu: (base) => ({ ...base, position: "relative" }) }}
             isLoading={isLoading}
           />
         </div>
 
-        <div></div>
+        <div className="mapping">
+          <table>
+            <tr>
+              <th>End fields</th>
+              <th>Source Fields</th>
+            </tr>
+            {endFields
+              ? endFields.map((field) => (
+                  <tr>
+                    <td>{field.label}</td>
+                    <td>
+                      <Select options={selectedfields} />
+                    </td>
+                  </tr>
+                ))
+              : null}
+          </table>
+        </div>
       </div>
     </div>
   );
